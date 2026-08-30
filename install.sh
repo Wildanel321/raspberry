@@ -58,15 +58,16 @@ sudo cp -r backend /opt/picontrol/
 sudo cp -r frontend /opt/picontrol/
 sudo cp picontrol.service /opt/picontrol/
 
-# Create settings data directory
-sudo mkdir -p /opt/picontrol/backend/data
-sudo chown -R picontrol:picontrol /opt/picontrol
-
 # 6.5 Rebuild native dependencies for Linux ARM64
 echo "Rebuilding native dependencies for Raspberry Pi..."
 cd /opt/picontrol/backend
-sudo -u picontrol npm rebuild
+sudo npm rebuild
 cd - > /dev/null
+
+# Create settings data directory and set ownership
+sudo mkdir -p /opt/picontrol/backend/data
+sudo chown -R picontrol:picontrol /opt/picontrol
+
 
 # 7. Configure passwordless privileges delegation for systemctl & apt
 echo "Configuring secure sudoers rules for picontrol..."
