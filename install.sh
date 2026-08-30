@@ -62,6 +62,12 @@ sudo cp picontrol.service /opt/picontrol/
 sudo mkdir -p /opt/picontrol/backend/data
 sudo chown -R picontrol:picontrol /opt/picontrol
 
+# 6.5 Rebuild native dependencies for Linux ARM64
+echo "Rebuilding native dependencies for Raspberry Pi..."
+cd /opt/picontrol/backend
+sudo -u picontrol npm rebuild
+cd - > /dev/null
+
 # 7. Configure passwordless privileges delegation for systemctl & apt
 echo "Configuring secure sudoers rules for picontrol..."
 sudo tee /etc/sudoers.d/picontrol > /dev/null <<EOF
@@ -92,4 +98,3 @@ echo -e ""
 echo -e "Service: picontrol.service"
 echo -e "Status:  Running"
 echo -e "==================================================${NC}"
-EOF
