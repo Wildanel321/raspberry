@@ -1,0 +1,15 @@
+[Unit]
+Description=PiControl Dashboard Server Agent
+After=network.target
+
+[Service]
+Type=simple
+User=picontrol
+WorkingDirectory=/opt/picontrol/backend
+ExecStart=/usr/bin/node dist/index.js
+Restart=always
+RestartSec=3
+Environment=NODE_ENV=production PORT=3000 BIND_ADDRESS=0.0.0.0 SAFE_DIR=/home/pi DATA_DIR=/opt/picontrol/backend/data
+
+[Install]
+WantedBy=multi-user.target
